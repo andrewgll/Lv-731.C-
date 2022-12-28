@@ -1,6 +1,6 @@
 # Lv-731.C-
-Educational repository for members of  Lv-731.C++ group
-
+## Educational repository for members of  Lv-731.C++ group
+---
 Таски мої, таски мої,
 Лихо мені з вами!
 Нащо стали на гітхабі
