@@ -98,8 +98,6 @@ Educational repository for members of  Lv-731.C++ group
 Од краю до краю...
 @olegonka 
 
-@rectangulared 
-
 Таски мої, таски мої,
 Квіти мої, діти!
 Виростав вас, доглядав вас,-
