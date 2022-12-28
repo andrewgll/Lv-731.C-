@@ -9,45 +9,47 @@ AnyType::AnyType(AnyType&& obj)
     }
 AnyType AnyType:: operator = (AnyType const &rvalue){
     data = rvalue.data;
-    type = rvalue.type;
-}
-AnyType AnyType:: operator = (char value){
-    data.c = value; 
-    type = "c";
-}
-AnyType AnyType:: operator = (short value){
-    data.si = value; 
-    type = "si";
-}
-AnyType AnyType:: operator = (int value){
-    data.i = value; 
-    type = "i";
-}
-AnyType AnyType:: operator = (long value){
-    data.l = value; 
-    type = "l";
-}
-AnyType AnyType:: operator = (long long value){
-    data.ll = value; 
-    type = "ll";
-}
-AnyType AnyType:: operator = (double value){
-    data.d = value; 
-    type = "d";
-}
-AnyType AnyType:: operator = (long double value){
-    data.ld = value; 
-    type = "ld";
+    level = rvalue.level;
 }
 AnyType AnyType:: operator = (bool value){
     data.b = value; 
-    type = "b";
+    level = 1;
 }
-
+AnyType AnyType:: operator = (char value){
+    data.c = value; 
+    level = 2;
+}
+AnyType AnyType:: operator = (short value){
+    data.si = value; 
+    level = 3;
+}
+AnyType AnyType:: operator = (int value){
+    data.i = value; 
+    level = 4;
+}
+AnyType AnyType:: operator = (long value){
+    data.l = value; 
+    level = 5;
+}
+AnyType AnyType:: operator = (long long value){
+    data.ll = value; 
+    level = 6;
+}
+AnyType AnyType:: operator = (float value){
+    data.d = value; 
+    level = 7;
+}
+AnyType AnyType:: operator = (double value){
+    data.d = value; 
+    level = 8;
+}
+AnyType AnyType:: operator = (long double value){
+    this = AnyType(value);
+}
 AnyType::AnyType(char c)
 {
     data.c = c;
-    type = "c";
+    level = 1;
 }
 AnyType::AnyType(short s)
 {
@@ -93,30 +95,7 @@ char* AnyType::GetType(){
     return type;
 }
 int AnyType:: ToInt(){
-    if(strcmp(type, "i")==0){
-        return data.i;
-    }
-    else if(strcmp(type, "c") == 0){
-        return static_cast<int>(data.c);
-    }
-    else if(strcmp(type, "si") == 0){
-        return static_cast<int>(data.si);
-    }
-    else if(strcmp(type, "f") == 0){
-        return static_cast<int>(data.f);
-    }
-    else if(strcmp(type, "d") == 0){
-        return static_cast<int>(data.d);
-    }
-    else if(strcmp(type, "ld") == 0){
-        return static_cast<int>(data.ld);
-    }
-    else if(strcmp(type, "b") == 0){
-        return static_cast<int>(data.b);
-    }
-    else if(strcmp(type, "ll") == 0 || strcmp(type, "l") == 0){
-        throw "Can not convert long to int.";
-    }
+   
 }
 long AnyType:: ToLong(){
     if(strcmp(type, "l")==0){

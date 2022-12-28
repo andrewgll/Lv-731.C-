@@ -1,7 +1,7 @@
 #pragma once
 class AnyType{
 private:
-    char *type; 
+    short level;
     union AnyData {
         char c;
         short si;
