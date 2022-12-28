@@ -1,6 +1,8 @@
 # Lv-731.C-
 Educational repository for members of  Lv-731.C++ group
 
+@Anlliep 
+@MR_DEUS 
 @agladkij 
 Квіти мої, діти!
 Нащо ж вас кохав я, нащо доглядав?
@@ -13,4 +15,9 @@ Educational repository for members of  Lv-731.C++ group
 Одну сльозу з очей карих —
 І пан над панами!
 Таски мої, таски мої,
-Лихо мені з вами!
+Лихо мені з вами! 
+@oleh_lashkevych 
+@vitluchko 
+@olegonka 
+@rectangulared 
+@igor_for_peace 
