@@ -1,5 +1,5 @@
 #!/bin/sh
 
-g++ -g ./lib/AnyType.cpp ./code/main.cpp -o ./bin/anytype
+g++ -g ./fundamentalTypeClass/lib/AnyType.cpp ./fundamentalTypeClass/code/main.cpp -o ./fundamentalTypeClass/bin/anytype
 
-./bin/anytype
+./fundamentalTypeClass/bin/anytype
