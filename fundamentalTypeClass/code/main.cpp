@@ -63,5 +63,7 @@ int main(){
     b = 1.1;
     Conversion(b);
     std::cout << b.GetType() << '\n';
-    
+    b = 100;
+    b /= 15.5;
+    std::cout << b.ToFloat() << '\n';
  }

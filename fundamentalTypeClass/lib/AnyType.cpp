@@ -2,25 +2,46 @@
 #include "string.h"
 #include <iostream>
 #include <typeinfo>
-AnyType::AnyType(int data)
-    : data(data), d_data(0){}
-AnyType::AnyType(long data)
-    : data(data), d_data(0){}
-AnyType::AnyType(long long data)
-    : data(data), d_data(0){}
-AnyType::AnyType(double d_data)
-    : d_data(d_data), data(0){}
-AnyType::AnyType(float d_data)
-    : d_data(d_data), data(0){}
+
 AnyType AnyType::operator=(const AnyType& rdata){
     d_data = rdata.d_data;
     data = rdata.data;
+    type = rdata.type;
 }
-const char* AnyType::GetType(){
-    if(data == 0){
-        return typeid(d_data).name();
+AnyType AnyType::operator+=(const AnyType& rdata){
+    d_data += rdata.d_data;
+    data += rdata.data;
+    type = rdata.type;
+}
+AnyType AnyType::operator-=(const AnyType& rdata){
+    d_data -= rdata.d_data;
+    data -= rdata.data;
+    type = rdata.type;
+}
+AnyType AnyType::operator/=(const AnyType& rdata){
+    
+    if(d_data != 0 ){
+        if(rdata.d_data != 0) {
+            d_data /= rdata.d_data;
+        }
+        else if(rdata.data != 0){
+            d_data /= rdata.data;
+        }
     }
-    return typeid(data).name();
+    if(data != 0){
+        if(rdata.d_data != 0){
+            data /= rdata.d_data;
+        }
+        else if(rdata.data != 0){
+            data /= rdata.data;
+        }
+    }
+    type = rdata.type;
+}
+AnyType AnyType::operator*=(const AnyType& rdata){
+    d_data *= rdata.d_data;
+    data *= rdata.data;
+    type = rdata.type;
 }
 void AnyType::Check(long long data){
     if(data == 0){
@@ -79,3 +100,11 @@ double AnyType::ToDouble(){
     }
     return d_data;
 }
+AnyType::AnyType(const AnyType& other)
+    : type(other.type), 
+    d_data(other.d_data), 
+    data(other.data){}
+AnyType::AnyType(const AnyType&& other) noexcept
+    :type(std::move(other.type)),
+    data(std::move(other.data)),
+    d_data(std::move(other.d_data)){}
