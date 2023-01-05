@@ -2,6 +2,7 @@
 #include "pch.h"
 #include "StringUtil.h"
 #include "MemoryLeakDetector.h"
+
 TEST(StringUtilFind, ReturnsMinusOneOnEmptyStrings)
 {
 	EXPECT_EQ(find("", ""), -1);
@@ -35,7 +36,7 @@ void testReplace(const char* initial, const char* before, const char* after, con
 {
 	MemoryLeakDetector d;
 	char* actual = replace(initial, before, after);
-	EXPECT_STR_EQ(expected, actual);
+	EXPECT_STREQ(expected, actual);
 	free(actual);
 }
 TEST(StringUtilReplace, NoChangesAppliedIfSubstringIsNotFound)

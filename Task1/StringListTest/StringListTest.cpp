@@ -19,7 +19,7 @@ TEST(StringList, CorrectlyAddsItem)
 	const char* item = "item";
 	StringListInit(list);
 	StringListAdd(list, item);
-	EXPECT_STR_EQ(item, list[0]);
+	EXPECT_STREQ(item, list[0]);
 	StringListDestroy(list);
 }
 TEST(StringList, RemovesFirstOccurrenceOfItem)
@@ -34,7 +34,7 @@ TEST(StringList, RemovesFirstOccurrenceOfItem)
 		StringListAdd(list, item);
 	size_t size = StringListSize(list);
 	StringListRemove(list, item);
-	EXPECT_STR_EQ(other, list[0]);
+	EXPECT_STREQ(other, list[0]);
 	EXPECT_EQ(StringListSize(list), size - 1);
 	StringListDestroy(list);
 }
@@ -54,7 +54,7 @@ TEST(StringList, RemovesAllOccurrencesInList)
 	}
 	size_t size = StringListSize(list);
 	StringListRemoveAll(list, item);
-	EXPECT_STR_EQ(other, list[0]);
+	EXPECT_STREQ(other, list[0]);
 	EXPECT_EQ(StringListSize(list), size - s);
 	StringListRemoveAll(list, other);
 	EXPECT_EQ(StringListSize(list), 0);
@@ -123,7 +123,7 @@ TEST(StringList, RemovesDuplicateItemsFromList)
 	StringListRemoveDuplicates(list);
 	for (int i = 0; i < expected_size; i++)
 	{
-		EXPECT_STR_EQ(list[i], expected[i]);
+		EXPECT_STREQ(list[i], expected[i]);
 	}
 	StringListDestroy(list);
 }
@@ -147,7 +147,7 @@ TEST(StringList, CorrectlyReplace_a_d)
 	StringListReplaceInStrings(list, "a", "d");
 	for (int i = 0; i < size; i++)
 	{
-		EXPECT_STR_EQ(list[i], expected[i]);
+		EXPECT_STREQ(list[i], expected[i]);
 	}
 	StringListDestroy(list);
 }
@@ -171,7 +171,7 @@ TEST(StringList, CorrectlyReplace_dd_e)
 	StringListReplaceInStrings(list, "dd", "e");
 	for (int i = 0; i < size; i++)
 	{
-		EXPECT_STR_EQ(list[i], expected[i]);
+		EXPECT_STREQ(list[i], expected[i]);
 	}
 	StringListDestroy(list);
 }
@@ -195,7 +195,7 @@ TEST(StringList, CorrectlyReplace_bb_fff)
 	StringListReplaceInStrings(list, "bb", "fff");
 	for (int i = 0; i < size; i++)
 	{
-		EXPECT_STR_EQ(list[i], expected[i]);
+		EXPECT_STREQ(list[i], expected[i]);
 	}
 	StringListDestroy(list);
 }
@@ -220,7 +220,7 @@ TEST(StringList, CorrectlySorts)
 	StringListSort(list);
 	for (int i = 0; i < size; i++)
 	{
-		EXPECT_STR_EQ(list[i], expected[i]);
+		EXPECT_STREQ(list[i], expected[i]);
 	}
 	StringListDestroy(list);
 }
