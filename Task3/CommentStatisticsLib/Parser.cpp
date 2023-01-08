@@ -1,3 +1,5 @@
+// by Klepatskyi Oleh
+
 #include "Parser.h"
 #include <fstream>
 #include <cctype>

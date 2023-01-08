@@ -1,3 +1,4 @@
+// by Klepatskyi Oleh
 #ifndef _KLEPATSKYI_COMMENT_STAT_H_
 #define _KLEPATSKYI_COMMENT_STAT_H_
 #include "Parser.h"

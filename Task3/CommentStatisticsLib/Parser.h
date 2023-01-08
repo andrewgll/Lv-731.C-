@@ -1,3 +1,4 @@
+// by Klepatskyi Oleh
 #ifndef _KLEPATSKYI_PARSER_H_
 #define _KLEPATSKYI_PARSER_H_
 
