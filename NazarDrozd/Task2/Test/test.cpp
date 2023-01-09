@@ -2,9 +2,22 @@
 #include "../AnyType.h"
 #include "../AnyType.cpp"
 
-TEST(AnyType, AnyType_constructor)
+class AnyTypeTest : public testing::Test
 {
-	AnyType any = 135;
+public:
+	void SetUp() override;
+//	void TearDown() override;
+protected:
+	AnyType any;
+};
+
+void AnyTypeTest::SetUp()
+{
+	any = 135;
+}
+
+TEST_F(AnyTypeTest, AnyType_constructor)
+{
 	EXPECT_EQ(135, any.GetValueInt());
 	any = true;
 	EXPECT_EQ(true, any.GetValueBool());
@@ -20,20 +33,18 @@ TEST(AnyType, AnyType_assignment)
 	EXPECT_EQ(135, any.GetValueInt());
 }
 
-TEST(AnyType, AnyType_copy_constructor)
+TEST_F(AnyTypeTest, AnyType_copy_constructor)
 {
-	AnyType any1 = 135;
-	AnyType any2 = any1;
-	EXPECT_EQ(135, any1.GetValueInt());
+	AnyType any2 = any;
+	EXPECT_EQ(135, any.GetValueInt());
 	EXPECT_EQ(135, any2.GetValueInt());
 }
 
-TEST(AnyType, AnyType_assignment_operator)
+TEST_F(AnyTypeTest, AnyType_assignment_operator)
 {
-	AnyType any1 = 135;
 	AnyType any2 = true;
-	any2 = any1;
-	EXPECT_EQ(135, any1.GetValueInt());
+	any2 = any;
+	EXPECT_EQ(135, any.GetValueInt());
 	EXPECT_EQ(135, any2.GetValueInt());
 }
 
@@ -66,36 +77,32 @@ TEST(AnyType, GetAnotherType)
 	EXPECT_THROW(any.GetValueInt(), ExceptionType);
 }
 
-TEST(AnyType, AnyType_assignment_1)
+TEST_F(AnyTypeTest, AnyType_assignment_1)
 {
-	AnyType any1 = 135;
 	AnyType any2 = 135;
-	any1 += any2;
-	EXPECT_EQ(270, any1.GetValueInt());
+	any += any2;
+	EXPECT_EQ(270, any.GetValueInt());
 }
 
-TEST(AnyType, AnyType_assignment_2)
+TEST_F(AnyTypeTest, AnyType_assignment_2)
 {
-	AnyType any1 = 135;
 	AnyType any2 = 1.5;
-	EXPECT_THROW(any1 += any2, ExceptionType);
+	EXPECT_THROW(any += any2, ExceptionType);
 }
 
-TEST(AnyType, AnyType_assignment_3)
+TEST_F(AnyTypeTest, AnyType_assignment_3)
 {
-	AnyType any1;
-	AnyType any2 = 135;
-	EXPECT_THROW(any1 += any2, ExceptionType);
+	AnyType any2;
+	EXPECT_THROW(any += any2, ExceptionType);
 }
 
-TEST(AnyType, AnyType_swap)
+TEST_F(AnyTypeTest, AnyType_swap)
 {
-	AnyType any1 = 135;
 	AnyType any2 = 1.5;
 	AnyType any3;
 
-	any1.Swap(any2);
-	EXPECT_EQ(1.5, any1.GetValueDouble());
+	any.Swap(any2);
+	EXPECT_EQ(1.5, any.GetValueDouble());
 	EXPECT_EQ(135, any2.GetValueInt());
 
 	any2.Swap(any3);
