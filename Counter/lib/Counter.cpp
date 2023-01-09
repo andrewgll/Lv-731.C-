@@ -41,7 +41,6 @@ private:
         kNone = 10
     };
 
-    int globalStats[3] = {0,0,0};
     std::mutex statsMutex;
     std::string inputPath;
     std::string outputPath;
@@ -337,13 +336,13 @@ private:
         {
             if (HandleFileFormat(file))
             {
-                globalStats[0]++;
                 futures.push_back(std::async(std::launch::async, &Counter::AnalyzeFile, this, file));
             }
         }
     }
 
-    void WriteStats(){
+    void WriteStats(int time){
+        int files = 0;
         std::ofstream openFile;
         openFile.open(outputPath);
         if(!openFile){
@@ -352,6 +351,7 @@ private:
         
         for (auto file : stats)
         {
+            files++;
             openFile << file.first << "\n";
             int i = 0;
             for (auto stat : file.second)
@@ -371,16 +371,16 @@ private:
         for (size_t i = 0; i < 3; i++)
         {
             if(i == 0)
-                openFile << "Files processed: " << globalStats[0] << "\n";
+                openFile << "Files processed: " << files << "\n";
             else if(i == 2)
-                openFile << "Program execution time: " << globalStats[2] * 0.001 << "ms" << "\n";
+                openFile << "Program execution time: " << time * 0.001 << "ms" << "\n";
         }
         
     }
 
     void Init(int argc, char **argv)
     {
-        Timer timer;
+        Timer time;
         try
         {
             HandleArguments(argc, argv);
@@ -393,8 +393,7 @@ private:
                     throw "ERROR: Something went wrong during counting\n";
                 }
             }
-            globalStats[2] = timer.Stop();
-            WriteStats();
+            WriteStats(time.Stop());
 
            
         }

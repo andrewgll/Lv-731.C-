@@ -1,0 +1,39 @@
+/home/a/Desktop/Lv-731.C-/./Counter/test/bigblankline.cpp
+Blank lines 157440
+Code lines 0
+Comments lines 0
+Done in: 17.883ms
+
+/home/a/Desktop/Lv-731.C-/./Counter/test/bigmulticomment.c
+Blank lines 0
+Code lines 0
+Comments lines 323183
+Done in: 24ms
+
+/home/a/Desktop/Lv-731.C-/./Counter/test/ohjustanotherheader.h
+Blank lines 0
+Code lines 104
+Comments lines 0
+Done in: 0.227ms
+
+/home/a/Desktop/Lv-731.C-/./Counter/test/sneakycases.c
+Blank lines 2
+Code lines 6
+Comments lines 12
+Done in: 0.144ms
+
+/home/a/Desktop/Lv-731.C-/./Counter/test/test.cpp
+Blank lines 5
+Code lines 23
+Comments lines 0
+Done in: 0.233ms
+
+/home/a/Desktop/Lv-731.C-/./Counter/test/test/more_test_files.cpp
+Blank lines 0
+Code lines 1
+Comments lines 2
+Done in: 0.187ms
+
+Total statistics:
+Files processed: 6
+Program execution time: 25.51ms
