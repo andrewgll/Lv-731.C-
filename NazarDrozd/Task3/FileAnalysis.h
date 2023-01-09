@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 #include "AllStatistics.h"
 
 FileAnalysis Analysis(std::ifstream& file)

@@ -8,17 +8,16 @@ void AllStatistics::addStatisticsFromAnalysis(const FileAnalysis& analysis)
 	m_code_lines += analysis.code_lines;
 }
 
-void AllStatistics::write(const AllStatistics& stat, const PathToFolder& path)
+void AllStatistics::write(const AllStatistics& statistics, const PathToFolder& path)
 {
 	m_total_files = path.m_path_to_files.size();
-	std::ofstream fout;
-
 	m_end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<float> duration = m_end - m_start;
 	m_time = duration.count();
 
+	std::ofstream fout;
 	fout.open(path.getPath() + "Statistics.txt");
-	fout << stat;
+	fout << statistics;
 	fout.close();
 }
 
