@@ -15,17 +15,17 @@ int main()
 	StringListAdd(node, str2);
 
 	std::cout << "List size =  " << StringListSize(node) << "\n\n";
-	ListShow(node);
+	StringListShow(node);
 
 	StringListReplaceInStrings(node, str1, str2);
 
-	std::cout << "List size =  " << StringListSize(node) << "\n\n";
-	ListShow(node);
+	std::cout << "\nList size =  " << StringListSize(node) << "\n\n";
+	StringListShow(node);
 
 	std::cout << "\nList destroy\n";
 	StringListDestroy(&node);
 	std::cout << "List size =  " << StringListSize(node) << "\n\n";
-	ListShow(node);
-	
+	StringListShow(node);
+
 	return 0;
 }

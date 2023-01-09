@@ -1,7 +1,8 @@
 #pragma once 
+#define _CRT_SECURE_NO_WARNINGS
 #include "MyList.h"
 
-void ListShow(char** list)
+void StringListShow(char** list)
 {
 	if (!list)
 	{
@@ -106,10 +107,11 @@ void StringListRemove(char*** list, char* str)
 
 int StringListSize(char** list)
 {
-	if (!list)
+	if (!list || !(*list))
 	{
 		return 0;
 	}
+
 	int counter = 0;
 
 	while (list)
@@ -122,7 +124,7 @@ int StringListSize(char** list)
 
 void StringListDestroy(char*** list)
 {
-	if (!list)
+	if (!(*list))
 	{
 		return;
 	}
@@ -144,10 +146,11 @@ void StringListDestroy(char*** list)
 
 int StringListIndexOf(char** list, char* str)
 {
-	if (!list || !str)
+	if (!list || !str || !(*list))
 	{
 		return -1;
 	}
+
 	int index = 0;
 
 	while (list)
@@ -219,7 +222,7 @@ void StringListSort(char** list)
 	}
 }
 
-void StringListReplaceInStrings(char** list, char* before, char* after)
+void StringListReplaceInStrings(char** list,const char* before,const char* after)
 {
 	if (!list || !before || !after)
 	{
@@ -229,18 +232,55 @@ void StringListReplaceInStrings(char** list, char* before, char* after)
 	{
 		return;
 	}
+	const int lenBefore = strlen(before);
+	const int lenAfter = strlen(after);
+
 	while (list)
 	{
-		if (!strcmp(*list, before))
+		if (strstr(*list, before) && lenBefore)
 		{
-			free(*list);
-			list[0] = (char*)calloc(strlen(after) + 1, sizeof(char));
-			if (!list[0])
+			char* temp = *list;
+			int occurrences = 0;
+			while (strstr(*list, before))
+			{
+				++occurrences;
+				*list = strstr(*list, before) + lenBefore;
+			}
+			*list = temp;
+
+			int sizeOfTemp = strlen(*list) + occurrences * (lenAfter - lenBefore);
+			char* tempResult = (char*)calloc(sizeOfTemp + 1, sizeof(char));
+
+			while (strstr(*list, before) && strlen(*list))
+			{
+				int index = strlen(tempResult);
+				int sizeOfCopy = strlen(*list) - strlen(strstr(*list, before));
+				strncpy(tempResult + index, *list, sizeOfCopy);
+
+				if (lenAfter)
+				{
+					index = strlen(tempResult);
+					strncpy(tempResult + index, after, lenAfter);
+				}
+				*list = strstr(*list, before) + lenBefore;
+			}
+			int index = strlen(tempResult);
+
+			strncpy(tempResult + index, *list, strlen(*list));
+			free(temp);
+			*list = (char*)calloc(strlen(tempResult) + 1, sizeof(char));
+
+			if (!(*list))
 			{
 				return;
 			}
-			strcpy_s(*list, strlen(after) + 1, after);
+			strncpy(*list, tempResult, strlen(tempResult));
+			free(tempResult);
+			list = (char**)list[1];
 		}
-		list = (char**)list[1];
+		else
+		{
+			list = (char**)list[1];
+		}
 	}
 }

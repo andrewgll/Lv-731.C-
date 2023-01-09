@@ -2,7 +2,7 @@
 #include <string>
 #include <stdlib.h>
 
-void ListShow(char** list);
+void StringListShow(char** list);
 
 /* Initializes list */
 void StringListInit(char*** list);
@@ -29,4 +29,4 @@ void StringListRemoveDuplicates(char** list);
 void StringListSort(char** list);
 
 /* Replaces every occurrence of the before, in each of the string lists's strings, with after. */
-void StringListReplaceInStrings(char** list, char* before, char* after);
+void StringListReplaceInStrings(char** list, const char* before, const char* after);
