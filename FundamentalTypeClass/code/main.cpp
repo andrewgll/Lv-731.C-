@@ -54,6 +54,7 @@ void Conversion(AnyType b){
          std::cout << "*****************\n";
    }
 int main(){
+    
     AnyType d = 2.2232323233232;
     Conversion(d);
     AnyType b = true;
@@ -66,4 +67,6 @@ int main(){
     b = 100;
     b /= 15.5;
     std::cout << b.ToFloat() << '\n';
+    b = "char!";
+    std::cout << b.GetType() << '\n';
  }

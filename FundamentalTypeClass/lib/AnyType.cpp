@@ -100,11 +100,19 @@ double AnyType::ToDouble(){
     }
     return d_data;
 }
+AnyType::AnyType(long long data, double d_data, char* type){
+    this->data = data;
+    this->d_data = d_data;
+    this->type = type;
+}
 AnyType::AnyType(const AnyType& other)
-    : type(other.type), 
-    d_data(other.d_data), 
-    data(other.data){}
-AnyType::AnyType(const AnyType&& other) noexcept
+:AnyType { other.data, other.d_data, other.type }{}
+AnyType::AnyType(AnyType&& other) 
     :type(std::move(other.type)),
     data(std::move(other.data)),
-    d_data(std::move(other.d_data)){}
+    d_data(std::move(other.d_data)){
+    other.data = 0;
+    other.type = nullptr;
+    other.d_data = 0;
+        
+}

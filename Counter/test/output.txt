@@ -1,0 +1,60 @@
+/home/a/Desktop/Lv-731.C-/./Counter/test/test copy 2.c
+Blank lines 0
+Code lines 0
+Comments lines 323183
+Done in: 23.378ms
+
+/home/a/Desktop/Lv-731.C-/./Counter/test/test copy 3.c
+Blank lines 0
+Code lines 0
+Comments lines 12
+Done in: 0.068ms
+
+/home/a/Desktop/Lv-731.C-/./Counter/test/test copy 4.c
+Blank lines 0
+Code lines 0
+Comments lines 323183
+Done in: 29.491ms
+
+/home/a/Desktop/Lv-731.C-/./Counter/test/test copy 5.c
+Blank lines 0
+Code lines 0
+Comments lines 323183
+Done in: 21.781ms
+
+/home/a/Desktop/Lv-731.C-/./Counter/test/test copy 6.c
+Blank lines 0
+Code lines 0
+Comments lines 323183
+Done in: 25.136ms
+
+/home/a/Desktop/Lv-731.C-/./Counter/test/test copy 7.c
+Blank lines 0
+Code lines 0
+Comments lines 323183
+Done in: 29.576ms
+
+/home/a/Desktop/Lv-731.C-/./Counter/test/test copy.c
+Blank lines 0
+Code lines 0
+Comments lines 12
+Done in: 0.158ms
+
+/home/a/Desktop/Lv-731.C-/./Counter/test/test.c
+Blank lines 0
+Code lines 0
+Comments lines 12
+Done in: 0.218ms
+
+/home/a/Desktop/Lv-731.C-/./Counter/test/test.cpp
+Blank lines 0
+Code lines 0
+Comments lines 0
+Done in: 0.101ms
+
+/home/a/Desktop/Lv-731.C-/./Counter/test/test/more_test_files.cpp
+Blank lines 0
+Code lines 0
+Comments lines 2
+Done in: 0.227ms
+
