@@ -4,67 +4,31 @@
 #include <fstream>
 #include <cctype>
 
-class Parser::ParseStream {
-private:
-	std::ifstream _ifs;
-public:
-	ParseStream() = default;
-	~ParseStream() {
-		close();
-	}
+Parser::Parser(const std::vector<std::string>& lines)
+: _lines(lines), _cursor(0), _lineNumber(0)
+{}
 
-	inline void open(const char* filepath)
-	{
-		if (filepath == nullptr)
-			throw ParseError("Path cannot be nullptr.");
-		close();
-		_ifs.open(filepath);
-	}
-
-	inline bool nextLine(std::string& str)
-	{
-		return (bool) std::getline(_ifs, str);
-	}
-
-	inline bool eof()
-	{
-		return !_ifs;
-	}
-
-	inline void close()
-	{
-		if (_ifs.is_open())
-			_ifs.close();
-	}
-};
-
-Parser::Parser() : _ps(new ParseStream()) {}
-Parser::~Parser() { delete _ps; }
-
-void Parser::start(const char* filepath)
+void Parser::start()
 {
-	_ps->open(filepath);
 	_cursor = 0;
 	_lineNumber = 0;
-	_ps->nextLine(_currentLine);
 }
 
 char Parser::next()
 {
-	if (_ps->eof())
+	if (_lineNumber == _lines.size())
 		return END_OF_FILE;
-	if (_cursor == _currentLine.size())
+	if (_cursor == _lines[_lineNumber].size())
 	{
 		nextLine();
 		return END_OF_LINE;
 	}
-	return _currentLine[_cursor++];
+	return _lines[_lineNumber][_cursor++];
 }
 
 void Parser::nextLine()
 {
-	if (_ps->nextLine(_currentLine))
-		_lineNumber++;
+    _lineNumber++;
 	_cursor = 0;
 }
 
@@ -74,4 +38,16 @@ char Parser::skipBlank()
 	while (isspace(c) && c != END_OF_LINE && c != END_OF_FILE)
 		c = next();
 	return c;
+}
+
+std::vector<std::string> getFileLines(const char* path)
+{
+	std::ifstream _ifs(path);
+	std::vector<std::string> lines;
+	std::string str;
+	while (std::getline(_ifs, str))
+	{
+		lines.push_back(str);
+	}
+	return lines;
 }

@@ -13,6 +13,13 @@ struct FileCommentStat {
 	size_t comment_lines = 0;
 };
 
+inline bool operator==(const FileCommentStat& lhs, const FileCommentStat& rhs)
+{
+	return lhs.blank_lines == rhs.blank_lines &&
+		lhs.code_lines == rhs.code_lines &&
+		lhs.comment_lines == rhs.comment_lines;
+}
+
 class CommentStatistics {	
 private:
 	std::unordered_map<std::string, FileCommentStat> _map;
@@ -38,8 +45,11 @@ private:
 	bool _lineHasComment;
 	bool _lineHasCode;
 public:
-	CommentCounter(const char* filename, FileCommentStat& fileStat);
+	CommentCounter(const std::vector<std::string>& lines, FileCommentStat& fileStat);
 	~CommentCounter();
+
+	void start();
+
 	CommentCounter(const CommentCounter&) = delete;
 	CommentCounter& operator=(const CommentCounter&) = delete;
 private:
@@ -48,6 +58,7 @@ private:
 	char parseComment();
 	void parseOneLineComment();
 	char parseMultilineComment();
+	void parseStringLiteral();
 	void assignComment();
 	void assignCode();
 };

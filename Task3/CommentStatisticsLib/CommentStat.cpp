@@ -3,17 +3,22 @@
 #include <iostream>
 using std::cout; using std::endl;
 
-CommentCounter::CommentCounter(const char* filename, FileCommentStat& fileStat)
-	: _parser(new Parser()), _fileStat(fileStat)
+CommentCounter::CommentCounter(const std::vector<std::string>& lines, FileCommentStat& fileStat)
+	: _parser(new Parser(lines)), _fileStat(fileStat)
 {
-	_parser->start(filename);
 	_fileStat = FileCommentStat();
-	parseLineFromStart();
+	
 }
 
 CommentCounter::~CommentCounter()
 {
 	delete _parser;
+}
+
+void CommentCounter::start()
+{
+	_parser->start();
+	parseLineFromStart();
 }
 
 void CommentCounter::parseLineFromStart()
@@ -36,6 +41,10 @@ void CommentCounter::parseLineFromStart()
 				parseLine();
 			continue;
 		}
+		if (cursor == '"')
+		{
+			parseStringLiteral();
+		}
 		assignCode();
 		parseLine();
 	}
@@ -54,6 +63,10 @@ void CommentCounter::parseLine()
 		else 
 		{
 			assignCode();
+			if (cursor == '"')
+			{
+				parseStringLiteral();
+			}
 		}
 	}
 }
@@ -115,11 +128,32 @@ char CommentCounter::parseMultilineComment()
 		}
 		else if (cursor == END_OF_FILE)
 		{
-			cout << _parser->getLine();
 			throw ParseError("Expected '*/' but got end of file.");
 		}
 	}
 	return cursor;
+}
+
+void CommentCounter::parseStringLiteral()
+{
+	char cursor;
+	while (true)
+	{
+		cursor = _parser->next();
+		if (cursor == '"')
+		{
+			break;
+		}
+		else if (cursor == '\\')
+		{
+			// skip the escaped char
+			_parser->next();
+		}
+		else if (cursor == END_OF_LINE || cursor == END_OF_FILE)
+		{
+			throw ParseError("Expected '\"' but got end of line");
+		}
+	}
 }
 
 void CommentCounter::assignCode()

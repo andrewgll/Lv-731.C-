@@ -4,6 +4,7 @@
 
 #include <stdexcept>
 #include <string>
+#include <vector>
 
 const char END_OF_FILE = 26;
 const char END_OF_LINE = '\n';
@@ -17,23 +18,22 @@ public:
 
 class Parser {
 private:
-	class ParseStream;
-	ParseStream* const _ps;
-	std::string _currentLine;
+	const std::vector<std::string>& _lines;
 	size_t _cursor;
 	size_t _lineNumber;
 public:
-	Parser();
-	~Parser();
+	Parser(const std::vector<std::string>& lines);
 	Parser(const Parser&) = delete;
 	Parser& operator=(const Parser&) = delete;
 
-	void start(const char* filepath);
+	void start();
 	char next();
 	void nextLine();
 	char skipBlank();
-	inline size_t getLine() { return _lineNumber; }
+	inline size_t getLine() const { return _lineNumber; }
+	inline size_t getCol() const { return _cursor; }
 };
 
+std::vector<std::string> getFileLines(const char* path);
 
 #endif // _KLEPATSKYI_PARSER_H_

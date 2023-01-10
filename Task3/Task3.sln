@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Task3", "Task3\Task3.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CommentStatisticsLib", "CommentStatisticsLib\CommentStatisticsLib.vcxproj", "{218F033F-4EBE-48EC-8027-704977CF9D84}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CommentStatistics-Test", "CommentStatistics-Test\CommentStatistics-Test.vcxproj", "{8D2722F6-7EA3-4302-8A09-2BEFCBB46078}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{218F033F-4EBE-48EC-8027-704977CF9D84}.Release|x64.Build.0 = Release|x64
 		{218F033F-4EBE-48EC-8027-704977CF9D84}.Release|x86.ActiveCfg = Release|Win32
 		{218F033F-4EBE-48EC-8027-704977CF9D84}.Release|x86.Build.0 = Release|Win32
+		{8D2722F6-7EA3-4302-8A09-2BEFCBB46078}.Debug|x64.ActiveCfg = Debug|x64
+		{8D2722F6-7EA3-4302-8A09-2BEFCBB46078}.Debug|x64.Build.0 = Debug|x64
+		{8D2722F6-7EA3-4302-8A09-2BEFCBB46078}.Debug|x86.ActiveCfg = Debug|Win32
+		{8D2722F6-7EA3-4302-8A09-2BEFCBB46078}.Debug|x86.Build.0 = Debug|Win32
+		{8D2722F6-7EA3-4302-8A09-2BEFCBB46078}.Release|x64.ActiveCfg = Release|x64
+		{8D2722F6-7EA3-4302-8A09-2BEFCBB46078}.Release|x64.Build.0 = Release|x64
+		{8D2722F6-7EA3-4302-8A09-2BEFCBB46078}.Release|x86.ActiveCfg = Release|Win32
+		{8D2722F6-7EA3-4302-8A09-2BEFCBB46078}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

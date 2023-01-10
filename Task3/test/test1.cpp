@@ -1,3 +1,4 @@
+// blank: 1, code: 12, comments: 4, total: 17
 
 int main()
 {

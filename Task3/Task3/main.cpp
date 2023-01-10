@@ -9,9 +9,10 @@ using namespace std;
 
 void printFileStat(const std::string& path)
 {
-	
 	FileCommentStat stat;
-	CommentCounter counter(path.c_str(), stat);
+	auto lines = getFileLines(path.c_str());
+	CommentCounter counter(lines, stat);
+	counter.start();
 	cout << "blank: " << stat.blank_lines << endl;
 	cout << "code: " << stat.code_lines << endl;
 	cout << "comment: " << stat.comment_lines << endl;
@@ -20,16 +21,20 @@ void printFileStat(const std::string& path)
 
 int main()
 {
-	const char* path = "D:\\Study\\softserve\\lv-731\\task3\\Task3-Files\\test\\test1.txt";
-	const char* project_path = "D:\\Study\\softserve\\lv-731\\task_repo\\Lv-731.C-\\Task3";
-
+	const char* path = SOLUTION_DIR "test";
 	const std::vector<std::string> vector = {".hpp", ".cpp", ".h", ".c"};
-	std::vector<std::string> result = getAllFilesWithExtension(project_path, vector);
+	std::vector<std::string> result = getAllFilesWithExtension(path, vector);
 
 	for (auto& s : result)
 	{
 		std::cout << s << std::endl;
-		printFileStat(s);
+		try {
+			printFileStat(s);
+		}
+		catch (const std::runtime_error& ex)
+		{
+			std::cerr << ex.what() << std::endl;
+		}
 	}
 	return 0;
 }
