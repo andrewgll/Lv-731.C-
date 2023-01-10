@@ -1,24 +1,20 @@
 // by Klepatskyi Oleh
 #include "CommentStat.h"
-#include <iostream>
-using std::cout; using std::endl;
 
-CommentCounter::CommentCounter(const std::vector<std::string>& lines, FileCommentStat& fileStat)
-	: _parser(new Parser(lines)), _fileStat(fileStat)
-{
-	_fileStat = FileCommentStat();
-	
-}
+CommentCounter::CommentCounter(const std::vector<std::string>& lines)
+	: _parser(new Parser(lines)), _fileStat()
+{}
 
 CommentCounter::~CommentCounter()
 {
 	delete _parser;
 }
 
-void CommentCounter::start()
+FileCommentStat CommentCounter::start()
 {
 	_parser->start();
 	parseLineFromStart();
+	return _fileStat;
 }
 
 void CommentCounter::parseLineFromStart()
@@ -41,10 +37,10 @@ void CommentCounter::parseLineFromStart()
 				parseLine();
 			continue;
 		}
-		if (cursor == '"')
+		/*if (cursor == '"' || cursor == '\'')
 		{
-			parseStringLiteral();
-		}
+			parseLiteral(cursor);
+		}*/
 		assignCode();
 		parseLine();
 	}
@@ -63,10 +59,10 @@ void CommentCounter::parseLine()
 		else 
 		{
 			assignCode();
-			if (cursor == '"')
+			/*if (cursor == '"' || cursor == '\'')
 			{
-				parseStringLiteral();
-			}
+				parseLiteral(cursor);
+			}*/
 		}
 	}
 }
@@ -134,13 +130,13 @@ char CommentCounter::parseMultilineComment()
 	return cursor;
 }
 
-void CommentCounter::parseStringLiteral()
+void CommentCounter::parseLiteral(char paren)
 {
 	char cursor;
 	while (true)
 	{
 		cursor = _parser->next();
-		if (cursor == '"')
+		if (cursor == paren)
 		{
 			break;
 		}
@@ -151,7 +147,7 @@ void CommentCounter::parseStringLiteral()
 		}
 		else if (cursor == END_OF_LINE || cursor == END_OF_FILE)
 		{
-			throw ParseError("Expected '\"' but got end of line");
+			throw ParseError("Expected string parenthesis but got end of line");
 		}
 	}
 }

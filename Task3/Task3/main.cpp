@@ -11,12 +11,12 @@ void printFileStat(const std::string& path)
 {
 	FileCommentStat stat;
 	auto lines = getFileLines(path.c_str());
-	CommentCounter counter(lines, stat);
-	counter.start();
-	cout << "blank: " << stat.blank_lines << endl;
-	cout << "code: " << stat.code_lines << endl;
-	cout << "comment: " << stat.comment_lines << endl;
-	cout << "total: " << (stat.blank_lines + stat.code_lines + stat.comment_lines) << endl;
+	CommentCounter counter(lines);
+	stat = counter.start();
+	cout << "blank: " << stat.blank() << endl;
+	cout << "code: " << stat.code() << endl;
+	cout << "comment: " << stat.comment() << endl;
+	cout << "total: " << stat.total() << endl;
 }
 
 int main()

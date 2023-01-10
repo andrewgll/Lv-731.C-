@@ -11,6 +11,11 @@ struct FileCommentStat {
 	size_t blank_lines = 0;
 	size_t code_lines = 0;
 	size_t comment_lines = 0;
+
+	size_t blank() const { return blank_lines; }
+	size_t code() const { return code_lines; }
+	size_t comment() const { return comment_lines; }
+	size_t total() const { return blank_lines + code_lines + comment_lines; }
 };
 
 inline bool operator==(const FileCommentStat& lhs, const FileCommentStat& rhs)
@@ -41,14 +46,14 @@ class Parser;
 class CommentCounter {
 private:
 	Parser* const _parser;
-	FileCommentStat& _fileStat;
+	FileCommentStat _fileStat;
 	bool _lineHasComment;
 	bool _lineHasCode;
 public:
-	CommentCounter(const std::vector<std::string>& lines, FileCommentStat& fileStat);
+	CommentCounter(const std::vector<std::string>& lines);
 	~CommentCounter();
 
-	void start();
+	FileCommentStat start();
 
 	CommentCounter(const CommentCounter&) = delete;
 	CommentCounter& operator=(const CommentCounter&) = delete;
@@ -58,7 +63,7 @@ private:
 	char parseComment();
 	void parseOneLineComment();
 	char parseMultilineComment();
-	void parseStringLiteral();
+	void parseLiteral(char paren);
 	void assignComment();
 	void assignCode();
 };
