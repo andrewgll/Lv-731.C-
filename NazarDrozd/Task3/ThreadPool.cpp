@@ -36,7 +36,7 @@ void ThreadPool::wait(std::vector<std::thread>& threads)
 {
 	for (unsigned int i = 0; i < threads.size(); i++)
 	{
-		threads.at(i).join();
+		threads[i].join();
 	}
 }
 

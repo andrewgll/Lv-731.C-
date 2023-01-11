@@ -1,9 +1,10 @@
 #pragma once
 #include "AllStatistics.h"
 
-FileAnalysis Analysis(std::ifstream& file)
+FileAnalysis Analysis(const std::string& path)
 {
 	FileAnalysis analysis;
+	std::ifstream file = std::ifstream(path);
 
 	enum class State
 	{

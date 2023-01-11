@@ -22,7 +22,6 @@ void PathToFolder::getPathToFilesFromDirectory()
 	}
 	catch (std::exception& ex)
 	{
-
 		std::cout << "Incorrect directory. Please, try again.\n\n";
 		getPathToFilesFromDirectory();
 	}

@@ -21,7 +21,7 @@ public:
 
 private:
 	std::mutex m_lock;
-	std::chrono::time_point<std::chrono::steady_clock> 	m_start, m_end;
+	std::chrono::time_point<std::chrono::steady_clock> m_start, m_end;
 	float m_time;
 	size_t m_blank_lines = 0;
 	size_t m_comment_lines = 0;
