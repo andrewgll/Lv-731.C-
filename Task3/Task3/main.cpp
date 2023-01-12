@@ -1,5 +1,6 @@
 // by Klepatskyi Oleh
-#include "CommentStat.h" 
+#include "CommentStat.h"
+#include "Parser.h"
 #include "FileFilter.h"
 
 #include <iostream>

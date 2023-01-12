@@ -1,5 +1,7 @@
 // by Klepatskyi Oleh
 #include "CommentStat.h"
+#include "Parser.h"
+#include <iostream>
 
 CommentCounter::CommentCounter(const std::vector<std::string>& lines)
 	: _parser(new Parser(lines)), _fileStat()
@@ -13,163 +15,143 @@ CommentCounter::~CommentCounter()
 FileCommentStat CommentCounter::start()
 {
 	_parser->start();
-	parseLineFromStart();
+	_lineHasCode = false;
+	_lineHasComment = false;
+	while (parseLine());
 	return _fileStat;
 }
 
-void CommentCounter::parseLineFromStart()
+bool CommentCounter::parseLine()
 {
-	char cursor;
-	int i = 0;
-	while ((cursor = _parser->skipBlank()) != END_OF_FILE)
+	bool hasSkippedChar = false;
+	_cursor = _parser->skipBlank();
+	while (_cursor != END_OF_LINE)
 	{
-		_lineHasCode = false;
-		_lineHasComment = false;
-		if (cursor == END_OF_LINE)
+		if (_cursor == END_OF_FILE)
 		{
-			_fileStat.blank_lines++;
-			continue;
+			return false;
 		}
-		if (cursor == '/')
+		
+		if (_cursor == '/')
 		{
-			cursor = parseComment();
-			if (cursor != END_OF_LINE)
-				parseLine();
-			continue;
+			hasSkippedChar = parseComment();
 		}
-		/*if (cursor == '"' || cursor == '\'')
+		else
 		{
-			parseLiteral(cursor);
-		}*/
-		assignCode();
-		parseLine();
-	}
-}
-
-void CommentCounter::parseLine()
-{
-	char cursor;
-	while ((cursor = _parser->skipBlank()) != END_OF_LINE)
-	{
-		if (cursor == '/')
-		{
-			cursor = parseComment();
-			if (cursor == END_OF_LINE) break;
-		}
-		else 
-		{
-			assignCode();
-			/*if (cursor == '"' || cursor == '\'')
+			_lineHasCode = true;
+			if (_cursor == '\"' || _cursor == '\'')
 			{
-				parseLiteral(cursor);
-			}*/
+				parseLiteral(_cursor);
+			}
 		}
+		if (!hasSkippedChar)
+		{
+			_cursor = _parser->skipBlank();
+		}
+		else
+		{
+			_cursor = _parser->current();
+		}
+		hasSkippedChar = false;
 	}
+	countLine();
+	return true;
 }
 
-char CommentCounter::parseComment()
+bool CommentCounter::parseComment()
 {
-	char cursor = _parser->next();
-	if (cursor == '/')
+	_cursor = _parser->next();
+	if (_cursor == '/')
 	{
 		parseOneLineComment();
-		return END_OF_LINE;
+		return true;
 	}
-	else if (cursor == '*')
+
+	if (_cursor == '*')
 	{
-		return parseMultilineComment();
+		parseMultilineComment();
+		return false;
 	}
-	else 
-	{
-		assignCode();
-		return cursor;
-	}
+
+	_lineHasCode = true;
+	return true;
 }
 
 void CommentCounter::parseOneLineComment()
 {
-	assignComment();
-	_parser->nextLine();
+	_lineHasComment = true;
+	_parser->skipLine();
 }
 
-char CommentCounter::parseMultilineComment()
+void CommentCounter::parseMultilineComment()
 {
-	char cursor;
-	char temp = 0;
+	_lineHasComment = true;
+	bool hasSkippedChar = false;
 	while (true)
 	{
-		if (temp != 0)
+		if (!hasSkippedChar)
 		{
-			cursor = temp;
-			temp = 0;
+			_cursor = _parser->skipBlank();
 		}
-		else
+		hasSkippedChar = false;
+		if (_cursor == '*')
 		{
-			cursor = _parser->next();
-		}
-		if (cursor == '*')
-		{
-			temp = _parser->next();
-			if (temp == '/')
+			_cursor = _parser->next();
+			if (_cursor == '/')
 			{
-				assignComment();
 				break;
 			}
+			hasSkippedChar = true;
 		}
-		if (cursor == END_OF_LINE)
+		else if (_cursor == END_OF_LINE)
 		{
-			assignComment();
-			_lineHasCode = false;
-			_lineHasComment = false;
+			countLine();
+			_lineHasComment = true;
 		}
-		else if (cursor == END_OF_FILE)
+		else if (_cursor == END_OF_FILE)
 		{
 			throw ParseError("Expected '*/' but got end of file.");
 		}
 	}
-	return cursor;
+}
+
+void CommentCounter::countLine()
+{
+	if (_lineHasComment && _lineHasCode)
+	{
+		_fileStat.code_with_comments_lines++;
+	}
+	else if (_lineHasCode)
+	{
+		_fileStat.code_lines++;
+	}
+	else if (_lineHasComment)
+	{
+		_fileStat.comment_lines++;
+	}
+	else
+	{
+		_fileStat.blank_lines++;
+	}
+
+	_lineHasComment = false;
+	_lineHasCode = false;
 }
 
 void CommentCounter::parseLiteral(char paren)
 {
-	char cursor;
-	while (true)
+	while ((_cursor = _parser->skipBlank()) != paren)
 	{
-		cursor = _parser->next();
-		if (cursor == paren)
-		{
-			break;
-		}
-		else if (cursor == '\\')
+		if (_cursor == '\\')
 		{
 			// skip the escaped char
-			_parser->next();
+			_cursor = _parser->next();
+			if (_cursor == END_OF_LINE)
+				countLine();
 		}
-		else if (cursor == END_OF_LINE || cursor == END_OF_FILE)
+		else if (_cursor == END_OF_LINE || _cursor == END_OF_FILE)
 		{
 			throw ParseError("Expected string parenthesis but got end of line");
 		}
-	}
-}
-
-void CommentCounter::assignCode()
-{
-	if (!_lineHasCode) {
-		if (_lineHasComment)
-		{
-			_fileStat.comment_lines--;
-			_lineHasComment = false;
-		}
-		_fileStat.code_lines++;
-		_lineHasCode = true;
-	}
-}
-
-void CommentCounter::assignComment()
-{
-	if (!_lineHasCode && !_lineHasComment)
-	{
-		_fileStat.comment_lines++;
-		_lineHasComment = true;
 	}
 }

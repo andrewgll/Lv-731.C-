@@ -1,10 +1,12 @@
 // by Klepatskyi Oleh
 #include "pch.h"
 #include "CommentStat.h"
+#include "Parser.h"
+
 TEST(CommentStatTest, CorrectlyParsesFile)
 {
 	const char* path = SOLUTION_DIR "test/test1.cpp";
-	FileCommentStat expected = { 1, 12, 4 };
+	FileCommentStat expected = { 1, 6, 4, 6 };
 	FileCommentStat actual;
 	auto lines = getFileLines(path);
 	CommentCounter counter(lines);
@@ -14,7 +16,7 @@ TEST(CommentStatTest, CorrectlyParsesFile)
 TEST(CommentStatTest, CorrectlyParsesWithCommentStartInStringLiteral)
 {
 	const char* path = SOLUTION_DIR "test/test2.cpp";
-	FileCommentStat expected = { 1, 4, 1 };
+	FileCommentStat expected = { 1, 2, 1, 2 };
 	FileCommentStat actual;
 	auto lines = getFileLines(path);
 	CommentCounter counter(lines);
@@ -25,7 +27,18 @@ TEST(CommentStatTest, CorrectlyParsesWithCommentStartInStringLiteral)
 TEST(CommentStatTest, LiteralTest)
 {
 	const char* path = SOLUTION_DIR "test/test3.cpp";
-	FileCommentStat expected = {0, 3, 1 };
+	FileCommentStat expected = { 0, 2, 1, 1 };
+	FileCommentStat actual;
+	auto lines = getFileLines(path);
+	CommentCounter counter(lines);
+	EXPECT_NO_THROW(actual = counter.start());
+	ASSERT_EQ(expected, actual);
+}
+
+TEST(CommentStatTest, MultilineCommentTest)
+{
+	const char* path = SOLUTION_DIR "test/test4.cpp";
+	FileCommentStat expected = { 0, 0, 8, 1 };
 	FileCommentStat actual;
 	auto lines = getFileLines(path);
 	CommentCounter counter(lines);

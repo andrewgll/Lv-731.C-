@@ -1,28 +1,31 @@
 // by Klepatskyi Oleh
 #ifndef _KLEPATSKYI_COMMENT_STAT_H_
 #define _KLEPATSKYI_COMMENT_STAT_H_
-#include "Parser.h"
 
 #include <unordered_map>
 #include <string>
 #include <mutex>
 
+
 struct FileCommentStat {
 	size_t blank_lines = 0;
 	size_t code_lines = 0;
 	size_t comment_lines = 0;
+	size_t code_with_comments_lines = 0;
 
 	size_t blank() const { return blank_lines; }
 	size_t code() const { return code_lines; }
 	size_t comment() const { return comment_lines; }
-	size_t total() const { return blank_lines + code_lines + comment_lines; }
+	size_t codeWithComment() const { return code_with_comments_lines; }
+	size_t total() const { return blank_lines + code_lines + comment_lines + code_with_comments_lines; }
 };
 
 inline bool operator==(const FileCommentStat& lhs, const FileCommentStat& rhs)
 {
 	return lhs.blank_lines == rhs.blank_lines &&
 		lhs.code_lines == rhs.code_lines &&
-		lhs.comment_lines == rhs.comment_lines;
+		lhs.comment_lines == rhs.comment_lines &&
+		lhs.code_with_comments_lines == rhs.code_with_comments_lines;
 }
 
 class CommentStatistics {	
@@ -49,6 +52,7 @@ private:
 	FileCommentStat _fileStat;
 	bool _lineHasComment;
 	bool _lineHasCode;
+	char _cursor;
 public:
 	CommentCounter(const std::vector<std::string>& lines);
 	~CommentCounter();
@@ -58,14 +62,12 @@ public:
 	CommentCounter(const CommentCounter&) = delete;
 	CommentCounter& operator=(const CommentCounter&) = delete;
 private:
-	void parseLineFromStart();
-	void parseLine();
-	char parseComment();
+	bool parseLine();
+	bool parseComment();
 	void parseOneLineComment();
-	char parseMultilineComment();
-	void parseLiteral(char paren);
-	void assignComment();
-	void assignCode();
+	void parseMultilineComment();
+	void countLine();
+	void parseLiteral(char parens);
 };
 
 #endif

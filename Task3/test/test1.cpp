@@ -1,4 +1,4 @@
-// blank: 1, code: 12, comments: 4, total: 17
+// blank: 1, code: 6, comments: 4, code with comments: 6, total: 17
 
 int main()
 {
