@@ -27,6 +27,7 @@
     <ClInclude Include="CommentStat.h" />
     <ClInclude Include="FileFilter.h" />
     <ClInclude Include="Parser.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
