@@ -46,6 +46,17 @@ TEST(CommentStatTest, MultilineCommentTest)
 	ASSERT_EQ(expected, actual);
 }
 
+TEST(CommentStatTest, MultilineLiteralTest)
+{
+	const char* path = SOLUTION_DIR "test/test5.cpp";
+	FileCommentStat expected = { 1,4,1,1 };
+	FileCommentStat actual;
+	auto lines = getFileLines(path);
+	CommentCounter counter(lines);
+	EXPECT_NO_THROW(actual = counter.start());
+	ASSERT_EQ(expected, actual);
+}
+
 TEST(CommentStatTest, CorrectlyParsesAllTheLines)
 {
 	const char* path = SOLUTION_DIR "test/sqlite3.c";

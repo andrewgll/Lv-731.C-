@@ -148,6 +148,7 @@ void CommentCounter::parseLiteral(char paren)
 			_cursor = _parser->next();
 			if (_cursor == END_OF_LINE)
 				countLine();
+			_lineHasCode = true;
 		}
 		else if (_cursor == END_OF_LINE || _cursor == END_OF_FILE)
 		{
