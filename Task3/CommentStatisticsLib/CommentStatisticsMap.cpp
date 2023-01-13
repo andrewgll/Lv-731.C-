@@ -1,23 +1,20 @@
 // by Klepatskyi Oleh
 #include "CommentStatisticsMap.h"
 
-#include <unordered_map>
+#include "ConcurrentUnorderedMap.h"
 #include <mutex>
 
 class CommentStatisticsMap::CommentStatisticsMapImpl {
 private:
-	std::unordered_map<std::string, FileCommentStat> _map;
-	std::mutex _mutex;
+	ConcurrentUnorderedMap<std::string, FileCommentStat> _map;
 public:
 	inline void addRecord(const std::string& filename, const FileCommentStat& stat)
 	{
-		std::lock_guard<std::mutex> lg(_mutex);
-		_map.insert({ filename, stat });
+		_map.insert(filename, stat);
 	}
 
 	inline const FileCommentStat& getFileStat(const std::string& path)
 	{
-		std::lock_guard<std::mutex> lg(_mutex);
 		return _map.at(path);
 	}
 };

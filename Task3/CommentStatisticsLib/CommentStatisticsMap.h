@@ -8,7 +8,7 @@
 class CommentStatisticsMap {
 private:
 	class CommentStatisticsMapImpl;
-	CommentStatisticsMapImpl* _impl;
+	CommentStatisticsMapImpl* const _impl;
 public:
 	CommentStatisticsMap();
 	~CommentStatisticsMap();
@@ -19,5 +19,4 @@ public:
 	const FileCommentStat& getFileStat(const std::string& path);
 };
 
-
-#endif
+#endif // _KLEPATSKYI_COMMENT_STATISTICS_MAP_H_

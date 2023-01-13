@@ -24,13 +24,13 @@
     <ClCompile Include="Parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CommentStatisticsMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CommentStatCore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommentStatisticsMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,13 +47,16 @@
     <ClInclude Include="Timer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CommentStatisticsMap.h">
+    <ClInclude Include="ConcurrentUnorderedMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FileCommentStat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CommentStatCore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommentStatisticsMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

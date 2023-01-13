@@ -25,16 +25,24 @@ inline bool operator==(const FileCommentStat& lhs, const FileCommentStat& rhs)
 		lhs.code_with_comments_lines == rhs.code_with_comments_lines;
 }
 
+inline FileCommentStat operator+(const FileCommentStat& lhs, const FileCommentStat& rhs)
+{
+	return {
+		lhs.blank_lines + rhs.blank_lines,
+		lhs.code_lines + rhs.code_lines,
+		lhs.comment_lines + rhs.comment_lines,
+		lhs.code_with_comments_lines + rhs.code_with_comments_lines
+	};
+}
+
 inline std::ostream& operator<<(std::ostream& os, const FileCommentStat& stat)
 {
 	os << "blank: " << stat.blank() << "\n"
-	 << "code: " << stat.code() << "\n"
-	 << "comment: " << stat.comment() << "\n"
-	 << "code with comment: " << stat.comment() << "\n"
-	 << "total: " << stat.total() << "\n";
+		<< "code: " << stat.code() << "\n"
+		<< "comment: " << stat.comment() << "\n"
+		<< "code with comment: " << stat.comment() << "\n"
+		<< "total: " << stat.total() << "\n";
 	return os;
-}
-
-
+};
 
 #endif

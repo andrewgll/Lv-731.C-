@@ -30,6 +30,7 @@
     <ClInclude Include="CommentStat.h" />
     <ClInclude Include="CommentStatCore.h" />
     <ClInclude Include="CommentStatisticsMap.h" />
+    <ClInclude Include="ConcurrentUnorderedMap.h" />
     <ClInclude Include="FileCommentStat.h" />
     <ClInclude Include="FileUtil.h" />
     <ClInclude Include="Parser.h" />
