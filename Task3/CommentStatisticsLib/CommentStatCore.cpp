@@ -2,31 +2,33 @@
 #include "CommentStatCore.h"
 #include "CommentStat.h"
 #include "Parser.h"
-#include "FileFilter.h"
-
-#ifndef _NDEBUG
 #include "Timer.h"
-#endif // _NDEBUG
 
 #include <future>
 #include <iostream>
 
 void addFileStat(CommentStatisticsMap& map, const std::string& file)
 {
-	std::vector<std::string> lines = getFileLines(file.c_str());
-	CommentCounter counter(lines);
-	FileCommentStat stat = counter.start();
-	map.addRecord(file, stat);
+	Timer t;
+	try {
+		std::vector<std::string> lines = getFileLines(file.c_str());
+		CommentCounter counter(lines);
+		FileCommentStat stat = counter.start();
+		map.addRecord(file, stat);
+	}
+	catch (const std::exception& ex)
+	{
+		std::cerr << "Error occurred: " << ex.what() << std::endl;
+		map.addRecord(file, { 0,0,0,0 });
+	}
 }
 
 void getCommentStatAsync(CommentStatisticsMap& map, const std::vector<std::string>& files)
 {
 	std::vector<std::future<void>> futures;
 
-	for (auto& const path : files)
+	for (auto const& path : files)
 	{
-		Timer t;
-		t.stop();
 		auto f = std::async(std::launch::async,
 			addFileStat,
 			std::ref(map),
@@ -39,21 +41,12 @@ void getCommentStatAsync(CommentStatisticsMap& map, const std::vector<std::strin
 	{
 		f.wait();
 	}
-
-	for (auto const& file : files)
-	{
-		const FileCommentStat& stat = map.getFileStat(file);
-		std::cout << file << " ============\n";
-		std::cout << stat << "\n";
-	}
 }
 
 void getCommentStat(CommentStatisticsMap& map, const std::vector<std::string>& files)
 {
-	for (auto& const path : files)
+	for (auto const& path : files)
 	{
-		Timer t;
-		t.stop();
 		addFileStat(map, path);
 	}
 }

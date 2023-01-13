@@ -18,7 +18,7 @@
     <ClCompile Include="CommentStat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FileFilter.cpp">
+    <ClCompile Include="FileUtil.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Parser.cpp">
@@ -38,7 +38,7 @@
     <ClInclude Include="CommentStat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FileFilter.h">
+    <ClInclude Include="FileUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Parser.h">

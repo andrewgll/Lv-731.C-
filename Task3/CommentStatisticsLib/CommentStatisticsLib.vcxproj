@@ -22,7 +22,7 @@
     <ClCompile Include="CommentStat.cpp" />
     <ClCompile Include="CommentStatCore.cpp" />
     <ClCompile Include="CommentStatisticsMap.cpp" />
-    <ClCompile Include="FileFilter.cpp" />
+    <ClCompile Include="FileUtil.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Parser.cpp" />
   </ItemGroup>
@@ -31,7 +31,7 @@
     <ClInclude Include="CommentStatCore.h" />
     <ClInclude Include="CommentStatisticsMap.h" />
     <ClInclude Include="FileCommentStat.h" />
-    <ClInclude Include="FileFilter.h" />
+    <ClInclude Include="FileUtil.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
