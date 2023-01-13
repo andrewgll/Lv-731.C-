@@ -58,6 +58,14 @@ TEST(CommentStatTest, MultilineLiteralTest)
 	ASSERT_EQ(expected, actual);
 }
 
+TEST(CommentStatTest, ThrowsWhenCommentIsNotClosed)
+{
+	const char* path = SOLUTION_DIR "test/testfail.cpp";
+	auto lines = getFileLines(path);
+	CommentCounter counter(lines);
+	ASSERT_THROW(counter.start(), ParseError);
+}
+
 TEST(CommentStatTest, CorrectlyParsesAllTheLines)
 {
 	const char* path = SOLUTION_DIR "test/sqlite3.c";
