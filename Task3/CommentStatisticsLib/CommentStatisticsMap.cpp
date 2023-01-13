@@ -28,6 +28,11 @@ public:
 		}
 		return sum;
 	}
+
+	inline size_t size() const
+	{
+		return _map.size();
+	}
 };
 
 CommentStatisticsMap::CommentStatisticsMap()
@@ -54,17 +59,7 @@ FileCommentStat CommentStatisticsMap::total(const std::vector<std::string> files
 	return _impl->total(files);
 }
 
-void writeToFile(CommentStatisticsMap& map, const std::vector<std::string> files, const std::string& path)
+size_t CommentStatisticsMap::size() const
 {
-	std::ofstream os(path, std::ios_base::out);
-	os << "===== Total:\n";
-	os << map.total(files) << std::endl;
-	for (auto const& file : files)
-	{
-		os << "==== File: " << file << std::endl;
-		os << map.getFileStat(file);
-	}
-	os << std::flush;
-	os.close();
-	std::cout << "File was saved to " << path << std::endl;
+	return _impl->size();
 }

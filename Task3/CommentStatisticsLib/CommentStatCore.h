@@ -12,6 +12,6 @@ void getCommentStatAsync(CommentStatisticsMap& map, const std::vector<std::strin
 
 void getCommentStat(CommentStatisticsMap& map, const std::vector<std::string>& files);
 
-void printStat(CommentStatisticsMap& map, const std::vector<std::string> files);
+void write(std::ostream& os, CommentStatisticsMap& map, const std::vector<std::string> files, std::time_t exectime);
 
 #endif // _KLEPATSKYI_COMMENT_STAT_CORE_H_

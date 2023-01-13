@@ -2,19 +2,26 @@
 
 #include "FileUtil.h"
 #include "CommentStatCore.h"
+#include "Timer.h"
 
 #include <iostream>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
 static const char* g_default_path = SOLUTION_DIR "test";
 static const std::vector<std::string> g_extensions = { ".hpp", ".cpp", ".h", ".c" };
 
-void writeToFileTask(CommentStatisticsMap& map, const std::vector<std::string>& files)
+void writeToFileTask(CommentStatisticsMap& map, const std::vector<std::string>& files, std::time_t exectime)
 {
 	try {
-		writeToFile(map, files, getOutputFileName());
+		std::string path = getOutputFileName();
+		std::ofstream os(path, std::ios_base::out);
+		write(os, map, files, exectime);
+		os << std::flush;
+		os.close();
+		std::cout << "File was saved to " << path << std::endl;
 	}
 	catch (const std::exception& ex)
 	{
@@ -22,20 +29,20 @@ void writeToFileTask(CommentStatisticsMap& map, const std::vector<std::string>& 
 	}
 }
 
-void output(std::string option, CommentStatisticsMap& map, const std::vector<std::string>& files)
+void output(std::string option, CommentStatisticsMap& map, const std::vector<std::string>& files, std::time_t exectime)
 {
 	if (option.starts_with("a"))
 	{
-		writeToFileTask(map, files);
-		printStat(map, files);
+		writeToFileTask(map, files, exectime);
+		write(std::cout, map, files, exectime);
 	}
 	else if (option.starts_with("f"))
 	{
-		writeToFileTask(map, files);
+		writeToFileTask(map, files, exectime);
 	}
 	else if (option.starts_with("c"))
 	{
-		printStat(map, files);
+		write(std::cout, map, files, exectime);
 	}
 }
 
@@ -50,12 +57,13 @@ int main()
 	
 	if (path.empty())
 		path = g_default_path;
-	std::cout << path << std::endl;
+
 	try {
 		auto files = getAllFilesWithExtension(path, g_extensions);
 		CommentStatisticsMap map;
+		TimerMicro timer;
 		getCommentStatAsync(map, files);
-		output(answer, map, files);
+		output(answer, map, files, timer.stop());
 	}
 	catch (const std::exception& ex)
 	{

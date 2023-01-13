@@ -27,6 +27,10 @@ public:
 		return _map.at(key);
 	}
 
+	inline size_t size() const
+	{
+		return _map.size();
+	}
 };
 
 #endif // _KLEPATSKYI_CONCURRENT_UNORDERED_MAP_H_

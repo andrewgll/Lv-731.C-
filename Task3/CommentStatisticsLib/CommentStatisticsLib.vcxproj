@@ -23,7 +23,6 @@
     <ClCompile Include="CommentStatCore.cpp" />
     <ClCompile Include="CommentStatisticsMap.cpp" />
     <ClCompile Include="FileUtil.cpp" />
-    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Parser.cpp" />
   </ItemGroup>
   <ItemGroup>

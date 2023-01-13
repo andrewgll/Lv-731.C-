@@ -10,18 +10,20 @@
 
 void addFileStat(CommentStatisticsMap& map, const std::string& file)
 {
-	Timer t;
+	TimerMicro t;
 	try {
 		std::vector<std::string> lines = getFileLines(file.c_str());
 		CommentCounter counter(lines);
 		FileCommentStat stat = counter.start();
+		stat.execution_time = t.stop();
 		map.addRecord(file, stat);
 	}
 	catch (const std::exception& ex)
 	{
-		FileCommentStat s;
-		s.setErrMsg(ex.what());
-		map.addRecord(file, s);
+		FileCommentStat stat;
+		stat.setErrMsg(ex.what());
+		stat.execution_time = t.stop();
+		map.addRecord(file, stat);
 	}
 }
 
@@ -53,14 +55,17 @@ void getCommentStat(CommentStatisticsMap& map, const std::vector<std::string>& f
 	}
 }
 
-void printStat(CommentStatisticsMap& map, const std::vector<std::string> files)
+void write(std::ostream& os, CommentStatisticsMap& map, const std::vector<std::string> files, std::time_t exectime)
 {
+	os << "===== Total:\n";
+	os << "Files : " << map.size() << std::endl;
+	FileCommentStat total = map.total(files);
+	// if we have done process in async way, sum will be the total thread time, as if we executed it sequencially
+	total.execution_time = exectime;
+	os << total << std::endl;
 	for (auto const& file : files)
 	{
-		const FileCommentStat& stat = map.getFileStat(file);
-		std::cout << file << " ============\n";
-		std::cout << stat << "\n";
+		os << "==== File: " << file << std::endl;
+		os << map.getFileStat(file);
 	}
-	std::cout << "Total: =====\n";
-	std::cout << map.total(files) << std::endl;
 }

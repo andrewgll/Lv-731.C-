@@ -2,27 +2,20 @@
 #ifndef _KLEPATSKYI_TIMER_H_
 #define _KLEPATSKYI_TIMER_H_
 
-#ifdef NDEBUG
-
-class Timer {
-public:
-	void stop();
-};
-
-#else 
-
 #include <chrono>
-#include <mutex>
 
+template <class Duration>
+class Timer;
+
+using TimerMicro = Timer<std::chrono::microseconds>;
+
+template <class Duration> 
 class Timer {
-	using microseconds = std::chrono::microseconds;
-	using system_clock = std::chrono::system_clock;
 private:
-	static std::mutex _mutex;
-	microseconds start;
+	Duration start;
 	bool _running;
 public:
-	Timer() : start(std::chrono::duration_cast<microseconds>(system_clock::now().time_since_epoch())), _running(true)
+	Timer() : start(std::chrono::duration_cast<Duration>(std::chrono::system_clock::now().time_since_epoch())), _running(true)
 	{}
 
 	~Timer()
@@ -33,8 +26,12 @@ public:
 		}
 	}
 
-	void stop();
+	std::time_t stop()
+	{
+		Duration end = std::chrono::duration_cast<Duration>(std::chrono::system_clock::now().time_since_epoch());
+		_running = false;
+		return end.count() - start.count();
+	}
 };
 
-#endif // NDEBUG
 #endif // _KLEPATSKYI_TIMER_H_
