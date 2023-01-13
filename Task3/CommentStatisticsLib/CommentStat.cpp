@@ -1,7 +1,7 @@
 // by Klepatskyi Oleh
+
 #include "CommentStat.h"
 #include "Parser.h"
-#include <iostream>
 
 CommentCounter::CommentCounter(const std::vector<std::string>& lines)
 	: _parser(new Parser(lines)), _fileStat()

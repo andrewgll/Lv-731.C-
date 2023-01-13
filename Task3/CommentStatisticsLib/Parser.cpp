@@ -2,10 +2,6 @@
 
 #include "Parser.h"
 #include <fstream>
-#include <cctype>
-#include <cassert>
-#include <iostream>
-#include <mutex>
 
 Parser::Parser(const std::vector<std::string>& lines)
 : _lines(lines), _cursor(0), _lineNumber(0)
@@ -13,14 +9,8 @@ Parser::Parser(const std::vector<std::string>& lines)
 
 void Parser::start()
 {
-	//static std::mutex _mutex;
 	_cursor = -1;
 	_lineNumber = 0;
-	//std::lock_guard<std::mutex> lg(_mutex);
-	/*for (const auto& s : _lines)
-	{
-		std::cout << s << std::endl;
-	}*/
 }
 
 char Parser::next()
