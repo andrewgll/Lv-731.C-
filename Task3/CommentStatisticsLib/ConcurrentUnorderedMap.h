@@ -26,6 +26,7 @@ public:
 		std::lock_guard<std::mutex> lg(_mutex);
 		return _map.at(key);
 	}
+
 };
 
 #endif // _KLEPATSKYI_CONCURRENT_UNORDERED_MAP_H_

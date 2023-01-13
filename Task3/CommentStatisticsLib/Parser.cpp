@@ -1,7 +1,6 @@
 // by Klepatskyi Oleh
 
 #include "Parser.h"
-#include <fstream>
 
 Parser::Parser(const std::vector<std::string>& lines)
 : _lines(lines), _cursor(0), _lineNumber(0)
@@ -62,16 +61,4 @@ char Parser::skipBlank()
 	while (isspace(c) && c != END_OF_LINE && c != END_OF_FILE)
 		c = next();
 	return c;
-}
-
-std::vector<std::string> getFileLines(const char* path)
-{
-	std::ifstream _ifs(path);
-	std::vector<std::string> lines;
-	std::string str;
-	while (std::getline(_ifs, str))
-	{
-		lines.push_back(str);
-	}
-	return lines;
 }

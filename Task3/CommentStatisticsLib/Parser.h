@@ -53,6 +53,4 @@ public:
 	
 };
 
-std::vector<std::string> getFileLines(const char* path);
-
 #endif // _KLEPATSKYI_PARSER_H_

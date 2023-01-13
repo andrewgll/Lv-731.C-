@@ -4,6 +4,7 @@
 
 #include "CommentStat.h"
 #include <string>
+#include <vector>
 
 class CommentStatisticsMap {
 private:
@@ -16,7 +17,10 @@ public:
 	CommentStatisticsMap& operator=(const CommentStatisticsMap&) = delete;
 
 	void addRecord(const std::string& filename, const FileCommentStat& stat);
-	const FileCommentStat& getFileStat(const std::string& path);
+	const FileCommentStat& getFileStat(const std::string& path) const;
+	FileCommentStat total(const std::vector<std::string> files) const;
 };
+
+void writeToFile(CommentStatisticsMap& map, const std::vector<std::string> files, const std::string& path);
 
 #endif // _KLEPATSKYI_COMMENT_STATISTICS_MAP_H_

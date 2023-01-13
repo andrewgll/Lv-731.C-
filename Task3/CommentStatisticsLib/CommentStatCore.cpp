@@ -3,6 +3,7 @@
 #include "CommentStat.h"
 #include "Parser.h"
 #include "Timer.h"
+#include "FileUtil.h"
 
 #include <future>
 #include <iostream>
@@ -59,4 +60,6 @@ void printStat(CommentStatisticsMap& map, const std::vector<std::string> files)
 		std::cout << file << " ============\n";
 		std::cout << stat << "\n";
 	}
+	std::cout << "Total: =====\n";
+	std::cout << map.total(files) << std::endl;
 }
