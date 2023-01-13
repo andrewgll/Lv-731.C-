@@ -19,8 +19,9 @@ void addFileStat(CommentStatisticsMap& map, const std::string& file)
 	}
 	catch (const std::exception& ex)
 	{
-		std::cerr << "Error occurred: " << ex.what() << std::endl;
-		map.addRecord(file, { 0,0,0,0 });
+		FileCommentStat s;
+		s.setErrMsg(ex.what());
+		map.addRecord(file, s);
 	}
 }
 

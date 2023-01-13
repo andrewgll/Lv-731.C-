@@ -2,6 +2,7 @@
 #include "pch.h"
 #include "CommentStat.h"
 #include "Parser.h"
+#include "FileUtil.h"
 
 TEST(CommentStatTest, CorrectlyParsesFile)
 {
