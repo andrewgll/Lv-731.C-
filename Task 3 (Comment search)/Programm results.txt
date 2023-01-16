@@ -1,0 +1,72 @@
+
+In file "D:\\CPP\\FirstChair\\SoftServe\\Task 3\\comments_search.cpp"
+Blank lines: 9 Comment lines: 17 Physical lines: 146
+Time taken for analyzing this file: 8392 microseconds
+
+In file "D:\\CPP\\FirstChair\\SoftServe\\Task 3\\test.cpp"
+Blank lines: 2 Comment lines: 10 Physical lines: 84
+Time taken for analyzing this file: 17958 microseconds
+
+In file "D:\\CPP\\FirstChair\\SoftServe\\Task 3\\testcopy.h"
+Blank lines: 60000 Comment lines: 60000 Physical lines: 30000
+Time taken for analyzing this file: 191982 microseconds
+
+In file "D:\\CPP\\FirstChair\\SoftServe\\Task 3\\testcopy2.cpp"
+Blank lines: 38 Comment lines: 0 Physical lines: 232
+Time taken for analyzing this file: 20951 microseconds
+
+In file "D:\\CPP\\FirstChair\\SoftServe\\Task 3\\testcopy3.cpp"
+Blank lines: 5 Comment lines: 0 Physical lines: 30
+Time taken for analyzing this file: 22371 microseconds
+
+In file "D:\\CPP\\FirstChair\\SoftServe\\Task 3\\testcopy4.cpp"
+Blank lines: 9 Comment lines: 1 Physical lines: 34
+Time taken for analyzing this file: 45160 microseconds
+
+In file "D:\\CPP\\FirstChair\\SoftServe\\Task 3\\comments_search.cpp"
+Blank lines: 9 Comment lines: 17 Physical lines: 146
+Time taken for analyzing this file: 1470 microseconds
+
+In file "D:\\CPP\\FirstChair\\SoftServe\\Task 3\\test.cpp"
+Blank lines: 2 Comment lines: 10 Physical lines: 84
+Time taken for analyzing this file: 1395 microseconds
+
+In file "D:\\CPP\\FirstChair\\SoftServe\\Task 3\\testcopy.h"
+Blank lines: 60000 Comment lines: 60000 Physical lines: 30000
+Time taken for analyzing this file: 190142 microseconds
+
+In file "D:\\CPP\\FirstChair\\SoftServe\\Task 3\\testcopy2.cpp"
+Blank lines: 38 Comment lines: 0 Physical lines: 232
+Time taken for analyzing this file: 1782 microseconds
+
+In file "D:\\CPP\\FirstChair\\SoftServe\\Task 3\\testcopy3.cpp"
+Blank lines: 5 Comment lines: 0 Physical lines: 30
+Time taken for analyzing this file: 983 microseconds
+
+In file "D:\\CPP\\FirstChair\\SoftServe\\Task 3\\testcopy4.cpp"
+Blank lines: 9 Comment lines: 1 Physical lines: 34
+Time taken for analyzing this file: 728 microseconds
+
+In file "D:\\CPP\\FirstChair\\SoftServe\\Task 3\\comments_search.cpp"
+Blank lines: 9 Comment lines: 17 Physical lines: 146
+Time taken for analyzing this file: 1254 microseconds
+
+In file "D:\\CPP\\FirstChair\\SoftServe\\Task 3\\test.cpp"
+Blank lines: 2 Comment lines: 10 Physical lines: 84
+Time taken for analyzing this file: 710 microseconds
+
+In file "D:\\CPP\\FirstChair\\SoftServe\\Task 3\\testcopy.h"
+Blank lines: 60000 Comment lines: 60000 Physical lines: 30000
+Time taken for analyzing this file: 152478 microseconds
+
+In file "D:\\CPP\\FirstChair\\SoftServe\\Task 3\\testcopy2.cpp"
+Blank lines: 38 Comment lines: 0 Physical lines: 232
+Time taken for analyzing this file: 1085 microseconds
+
+In file "D:\\CPP\\FirstChair\\SoftServe\\Task 3\\testcopy3.cpp"
+Blank lines: 5 Comment lines: 0 Physical lines: 30
+Time taken for analyzing this file: 607 microseconds
+
+In file "D:\\CPP\\FirstChair\\SoftServe\\Task 3\\testcopy4.cpp"
+Blank lines: 9 Comment lines: 1 Physical lines: 34
+Time taken for analyzing this file: 565 microseconds
