@@ -1,0 +1,6 @@
+================|Results|================
+Total number of processed files: 3
+Blank lines: 11
+Code lines: 38
+Comment lines: 22
+Time: 0.0149286s
